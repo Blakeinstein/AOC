@@ -1,3 +1,7 @@
 a.out
 .vscode
 .editorconfig
+debug/
+target/
+Cargo.lock
+**/*.rs.bk
