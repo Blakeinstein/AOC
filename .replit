@@ -1,2 +1,2 @@
 language = "cpp"
-run = "cd 2015 && clang++-7 -pthread -std=c++17 q3.cpp && ./a.out"
+run = "cd 2015 && clang++-7 -pthread -std=c++17 q5.cpp && ./a.out"
