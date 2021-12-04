@@ -10,19 +10,23 @@ impl Puzzle {
   fn bingo(&mut self, start_index: usize) -> u32 {
     for i in start_index..self.draw_numbers.len()  {
       for board in self.boards.iter_mut() {
-        for j in 0..5 {
-          for k in 0..5 {
-            if board[j][k].0 == self.draw_numbers[i] {
-              board[j][k].1 = true;
-            }
-          }
-        }
+        Self::mark_board(board, self.draw_numbers[i]);
         if Self::check_bingo_board(board) {
           return self.draw_numbers[i] * Self::sum_unchecked(board);
         }
       }
     }
     0
+  }
+
+  fn mark_board(board: &mut Board, number: u32) {
+    for j in 0..5 {
+      for k in 0..5 {
+        if board[j][k].0 == number {
+          board[j][k].1 = true;
+        }
+      }
+    }
   }
 
   fn check_bingo_board(board: &Board) -> bool {
@@ -58,13 +62,7 @@ impl Puzzle {
         return self.bingo(i);
       }
       for board in self.boards.iter_mut() {
-        for j in 0..5 {
-          for k in 0..5 {
-            if board[j][k].0 == self.draw_numbers[i] {
-              board[j][k].1 = true;
-            }
-          }
-        }
+        Self::mark_board(board, self.draw_numbers[i]);
       }
       self.boards.retain(|&board| !Self::check_bingo_board(&board));
     }
@@ -92,12 +90,12 @@ fn get_input(input: &str) -> Puzzle {
 
 pub fn part1(input: String) {
   let mut puzzle = get_input(&input);
-  let result = puzzle.bingo(0);
-  println!("Part1: {}", result);
+  let part1 = puzzle.bingo(0);
+  dbg!(part1);
 }
 
 pub fn part2(input: String) {
   let mut puzzle = get_input(&input);
-  let result = puzzle.bingo2();
-  println!("Part2: {}", result);
+  let part2 = puzzle.bingo2();
+  dbg!(part2);
 }
