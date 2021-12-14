@@ -20,9 +20,9 @@ fn get_input(input: &str) -> Puzzle {
   }
 }
 
-fn fold_polymer(puzzle: &Puzzle, steps: usize) -> i64 {
+fn fold_polymer(puzzle: &Puzzle, steps: usize) -> u128 {
   let mut counts = puzzle.starter.chars().fold(HashMap::new(), |mut map, c| {
-    *map.entry(c.to_string()).or_insert(0) += 1i64;
+    *map.entry(c.to_string()).or_insert(0) += 1u128;
     map
   });
   let mut pairs = puzzle.starter.chars()
@@ -55,6 +55,6 @@ pub fn part1(input: String) {
 
 pub fn part2(input: String) {
   let input = get_input(&input);
-  let part1 = fold_polymer(&input, 40);
-  dbg!(part1);
+  let part2 = fold_polymer(&input, 40);
+  dbg!(part2);
 }
