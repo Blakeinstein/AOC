@@ -177,6 +177,3 @@ pub fn part1(input: String) {
   }
   dbg!(part2);
 }
-  
-pub fn part2(input: String) {
-}

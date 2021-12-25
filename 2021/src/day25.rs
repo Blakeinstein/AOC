@@ -98,6 +98,3 @@ pub fn part1(input: String) {
   }
   dbg!(part1);
 }
-
-pub fn part2(input: String) {
-}
