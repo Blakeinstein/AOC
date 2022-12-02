@@ -3,7 +3,7 @@ use std::fs;
 use std::io;
 use std::time::{Duration, Instant};
 
-use aoc2021::{get_day, noop};
+use aoc2022::{get_day, noop};
 
 fn fmt_time(ms: f64) -> String {
     if ms <= 1.0 {
@@ -59,7 +59,7 @@ fn main() {
 
     // Read input file
     let cwd = env::current_dir().unwrap();
-    let filename = cwd.join("input/2021").join(format!("day{}.txt", day_num));
+    let filename = cwd.join("input/2022").join(format!("day{}.txt", day_num));
     println!("Reading {}", filename.display());
     let input = fs::read_to_string(filename).expect("Error while reading");
 
