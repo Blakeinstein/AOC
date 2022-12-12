@@ -57,15 +57,17 @@ impl PartialEq for Vertex {
 
 impl Eq for Vertex {}
 
-fn shortest_path(map: &MAP, start: POS, target: &POS) -> usize {
+fn shortest_path(map: &MAP, starts: &[POS], target: &POS) -> usize {
   let mut distances = HashMap::new();
   let mut visited = HashSet::new();
   let mut to_visit = BinaryHeap::new();
-  distances.insert(start, 0);
-  to_visit.push(Vertex {
-    point: start,
-    distance: 0
-  });
+  for start in starts {
+    distances.insert(*start, 0);
+    to_visit.push(Vertex {
+      point: *start,
+      distance: 0
+    });
+  }
   while let Some(Vertex { point , distance }) = to_visit.pop() {
     if !visited.insert(point) {
       continue;
@@ -95,21 +97,17 @@ fn shortest_path(map: &MAP, start: POS, target: &POS) -> usize {
     }
   }
 
-  return *distances.get(target).unwrap_or(&usize::MAX);
+  return *distances.get(target).unwrap();
 }
 
 pub fn part1(input: String) { 
   let (map, start, end, _) = parse_input(&input);
-  let ans = shortest_path(&map, start, &end);
+  let ans = shortest_path(&map, &[start] ,&end);
   dbg!(ans);
 }
 
 pub fn part2(input: String) {
   let (map, _, end, possible_starts) = parse_input(&input);
-  let ans = possible_starts
-    .iter()
-    .map(|pos| shortest_path(&map, *pos, &end))
-    .min()
-    .unwrap();
+  let ans = shortest_path(&map, &possible_starts, &end);
   dbg!(ans);
 }
