@@ -50,7 +50,7 @@ pub fn get_day(day: u32) -> (DayFn, DayFn) {
         16 => (day16::part1, day16::part2),
         17 => (day17::part1, day17::part2),
         18 => (day18::part1, day18::part2),
-        19 => (day19::part1, noop),
+        19 => (day19::part1, day19::part2),
         20 => (day20::part1, day20::part2),
         21 => (day21::part1, day21::part2),
         22 => (day22::part1, day22::part2),
