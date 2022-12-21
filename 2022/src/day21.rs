@@ -1,4 +1,4 @@
-use std::{rc::Rc, cell::RefCell, collections::HashMap, ops::{Mul, Add, Sub, Div}};
+use std::{rc::Rc, cell::RefCell, collections::{HashMap}, ops::{Mul, Add, Sub, Div}};
 
 use either::Either;
 
@@ -122,12 +122,21 @@ fn walk(monkeys: &MonkeySet, key: &str) -> String {
 
   let oper = val.unwrap_right();
 
+  if ['/', '*'].contains(&oper.op_char) {
+    return format!(
+      "({}{}{})",
+      walk(monkeys, oper.l_op),
+      oper.op_char,
+      walk(monkeys, oper.r_op)
+    );
+  }
+
   return format!(
-    "({} {} {})",
+    "{}{}{}",
     walk(monkeys, oper.l_op),
     oper.op_char,
     walk(monkeys, oper.r_op)
-  )
+  );
 }
 
 pub fn part2(input: String) {
@@ -142,5 +151,5 @@ pub fn part2(input: String) {
     (eq.r_op, eval(&monkeys, eq.l_op))
   };
   
-  println!("{} = {}", walk(&monkeys, eq.l_op), known_val);
+  println!("{}={}", walk(&monkeys, eq.l_op), known_val);
 }
