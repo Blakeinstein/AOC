@@ -122,21 +122,12 @@ fn walk(monkeys: &MonkeySet, key: &str) -> String {
 
   let oper = val.unwrap_right();
 
-  if ['/', '*'].contains(&oper.op_char) {
-    return format!(
-      "({}{}{})",
-      walk(monkeys, oper.l_op),
-      oper.op_char,
-      walk(monkeys, oper.r_op)
-    );
-  }
-
   return format!(
-    "{}{}{}",
+    "({}{}{})",
     walk(monkeys, oper.l_op),
     oper.op_char,
     walk(monkeys, oper.r_op)
-  );
+  );  
 }
 
 pub fn part2(input: String) {
