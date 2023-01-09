@@ -24,3 +24,6 @@ class Point:
   
   def __abs__(self) -> float:
     return abs(self.x) + abs(self.y) + abs(self.z)
+  
+  def copy(self) -> Point:
+    return Point(self.x, self.y, self.z)
