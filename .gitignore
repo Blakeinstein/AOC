@@ -6,3 +6,9 @@ target/
 Cargo.lock
 **/*.rs.bk
 *.txt
+!requirements.txt
+!requirements_dev.txt
+!VERSION.txt
+.env
+__pycache__
+*.pyc
