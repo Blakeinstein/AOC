@@ -14,7 +14,7 @@ def run(day):
   t1 = perf_counter()
   code.solve()
   t2 = perf_counter()
-  print(f"Execution time: {t2 - t1:0.4f} seconds")
+  print(f"\n\nExecution time: {t2 - t1:0.4f} seconds")
 
 if __name__ == "__main__":
   day = int(next(x for x in argv if x.isnumeric()))
