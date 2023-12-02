@@ -52,7 +52,7 @@ game :: Parser (Game [Pull])
 game = Game <$> (string "Game " *> decimal) <* string ": " <*> pull `sepBy` string "; "
 
 solve :: String -> IO ()
-solve input = putStrLn "--- Day 01 ---" >> print (part1 $ p input) >> print (part2 $ p input)
+solve input = putStrLn "--- Day 02 ---" >> print (part1 $ p input) >> print (part2 $ p input)
   where
     p :: String -> Inp
     p = mapMaybe (=~ game) . lines
