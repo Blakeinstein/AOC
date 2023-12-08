@@ -88,6 +88,6 @@ parse :: Parser Bid
 parse = Bid <$> (handString <* sym ' ') <*> decimal
 
 solve :: String -> IO ()
-solve input = putStrLn "--- Day 01 ---" >> print (part1 $ p input) >> print (part2 $ p input)
+solve input = putStrLn "--- Day 07 ---" >> print (part1 $ p input) >> print (part2 $ p input)
   where
     p = mapMaybe (=~ parse) . lines
