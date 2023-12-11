@@ -41,6 +41,6 @@ parser :: Parser [Int]
 parser = signed decimal `sepBy` sym ' '
 
 solve :: String -> IO ()
-solve input = putStrLn "--- Day 01 ---" >> print (part1 $ p input) >> print (part2 $ p input)
+solve input = putStrLn "--- Day 09 ---" >> print (part1 $ p input) >> print (part2 $ p input)
   where
     p = mapMaybe (=~ parser) . lines
