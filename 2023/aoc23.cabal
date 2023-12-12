@@ -50,7 +50,8 @@ library
         Day25
 
     -- Modules included in this library but not exported.
-    -- other-modules:
+    other-modules:
+        Coord
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:

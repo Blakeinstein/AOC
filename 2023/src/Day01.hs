@@ -8,7 +8,7 @@ import Data.Maybe (mapMaybe)
 
 extractDigits :: String -> Int
 extractDigits str
-  | not (null digits) = (makeTwoDigitNumber (head digits) (last digits))
+  | not (null digits) = makeTwoDigitNumber (head digits) (last digits)
   | otherwise = 0
   where
     digits = filter isDigit str
@@ -30,7 +30,7 @@ decodeDigit s = asum . map find $ digits
 
 part2 :: [String] -> Int
 part2 = sum . map (calibrationValue . mapMaybe decodeDigit . tails)
-  where calibrationValue = ((+) <$> ((* 10) . head) <*> last)
+  where calibrationValue = (+) <$> ((* 10) . head) <*> last
 
 solve :: String -> IO ()
 solve input = putStrLn "--- Day 01 ---" >> print (part1 $ lines input) >> print (part2 $ lines input)

@@ -1,7 +1,5 @@
 {-# LANGUAGE BangPatterns #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DeriveDataTypeable #-}
 module Day10 (solve) where
 
 import Control.Applicative (Alternative, asum, many, some)
@@ -14,27 +12,11 @@ import Text.Regex.Applicative (RE, sym, string, psym, (=~))
 import Text.Regex.Applicative.Common (decimal)
 import Debug.Trace (trace)
 import Data.Tree (flatten)
-import GHC.Generics (Generic)
-import Data.Data (Data)
 import Data.List (nub)
 
+import Coord (Coord(..), cardinal, north, east, south, west, invert, invert')
+
 data Pipe = H | V | L | F | Se | St | J | G deriving (Show, Eq)
-data Coord = Coord {_y, _x :: Int} deriving (Show, Eq, Ord, Generic, Data)
-
-mapCoord :: (Int -> Int) -> Coord -> Coord
-mapCoord f (Coord y x) = Coord (f y) (f x)
-
-zipCoord :: (Int -> Int -> Int) -> Coord -> Coord -> Coord
-zipCoord f (Coord y1 x1) (Coord y2 x2) = Coord (f y1 y2) (f x1 x2)
-
-instance Num Coord where
-  (+) = zipCoord (+)
-  (-) = zipCoord (-)
-  (*) = zipCoord (*)
-  negate = mapCoord negate
-  abs = mapCoord abs
-  signum = mapCoord signum
-  fromInteger = (\i -> Coord i i) . fromInteger
 
 type Map = M.Map Coord Pipe
 
@@ -44,27 +26,6 @@ dbg :: Show a => a -> a
 dbg a = trace (show a) a
 
 type Parser a = RE Char a
-
-cardinal :: Coord -> [Coord]
-cardinal (Coord x y) = [Coord (y-1) x, Coord y (x-1), Coord y (x+1), Coord (y+1) x]
-
-north :: Coord
-north = Coord (-1) 0
-
-east :: Coord
-east = Coord 0 1
-
-south :: Coord
-south = Coord 1 0
-
-west :: Coord
-west = Coord 0 (-1)
-
-invert :: Coord -> Coord
-invert (Coord y x) = Coord x y
-
-invert' :: Coord -> Coord
-invert' (Coord y x) = Coord (-x) (-y)
 
 dfsN :: Ord a => (a -> [a]) -> [a] -> [a]
 dfsN = dfsOnN id
