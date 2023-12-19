@@ -8,7 +8,6 @@ import Data.List (transpose, find)
 
 import Text.Regex.Applicative ( RE, sym, (=~), (<|>), string )
 import Debug.Trace (trace)
-import Coord (Coord(..))
 
 sepBy :: Alternative f => f a -> f b -> f [a]
 p `sepBy` sep = (:) <$> p <*> many (sep *> p)
