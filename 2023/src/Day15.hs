@@ -1,6 +1,6 @@
 module Day15 (solve) where
 
-import Control.Applicative (many)
+import Control.Applicative ( many, Alternative, some )
 
 import Data.Maybe (mapMaybe, fromMaybe)
 import Data.List (transpose, sortBy, elemIndex)
@@ -9,8 +9,6 @@ import Data.Char (ord)
 
 import Text.Regex.Applicative ( RE, sym, (=~), (<|>), string, psym )
 import Debug.Trace (trace)
-import Control.Applicative (Alternative)
-import Control.Applicative (some)
 
 dbg :: Show a => a -> a
 dbg a = trace (show a) a

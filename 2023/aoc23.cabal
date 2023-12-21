@@ -62,7 +62,9 @@ library
         transformers,
         mtl,
         array,
-        PSQueue
+        PSQueue,
+        lens,
+        linear
     hs-source-dirs:   src
     default-language: Haskell2010
 
