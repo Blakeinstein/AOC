@@ -2,10 +2,11 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 module Coord where
 
-import GHC.Generics (Generic)
+import GHC.Generics (Generic, Generic1, Generically1)
 import Data.Data (Data)
+import Data.Ix (Ix)
 
-data Coord = Coord {_y, _x :: Int} deriving (Show, Eq, Ord, Generic, Data)
+data Coord = Coord {_y, _x :: Int} deriving (Show, Eq, Ord, Ix, Generic, Data)
 
 mapCoord :: (Int -> Int) -> Coord -> Coord
 mapCoord f (Coord y x) = Coord (f y) (f x)

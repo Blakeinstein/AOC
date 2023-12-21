@@ -60,7 +60,9 @@ library
         containers,
         regex-applicative,
         transformers,
-        mtl
+        mtl,
+        array,
+        PSQueue
     hs-source-dirs:   src
     default-language: Haskell2010
 
