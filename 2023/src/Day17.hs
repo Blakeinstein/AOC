@@ -6,7 +6,7 @@ import Data.PSQueue (Binding ((:->)))
 import qualified Data.PSQueue as PQ
 import Data.List (foldl', (\\))
 
-import Coord (Coord(..), distance, north, south, east, west)
+import Coord (Coord(..), Dir(..), (#+), distance, north, south, east, west)
 
 import Debug.Trace (trace)
 dbg :: Show a => a -> a
@@ -14,17 +14,8 @@ dbg a = trace (show a) a
 
 type Prio = (Int, Int, Int)
 type State = (Coord, (Int, Dir))
-data Dir = U | R | D | L | None deriving (Show, Eq, Ord)
 
 type CostMap = M.Map Coord Int
-
-(#+) :: Coord -> Dir -> Coord
-c #+ dir = case dir of
-  U -> c + north
-  R -> c + east
-  D -> c + south
-  L -> c + west
-  None -> c
 
 opposite :: Dir -> Dir
 opposite U = D

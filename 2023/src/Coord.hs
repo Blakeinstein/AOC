@@ -23,6 +23,12 @@ instance Num Coord where
   signum = mapCoord signum
   fromInteger = (\i -> Coord i i) . fromInteger
 
+getY :: Coord -> Int
+getY (Coord y _) = y
+
+getX :: Coord -> Int
+getX (Coord _ x) = x
+
 _sum :: Coord -> Int
 _sum (Coord y x) = y + x
 
@@ -49,3 +55,13 @@ invert (Coord y x) = Coord x y
 
 invert' :: Coord -> Coord
 invert' (Coord y x) = Coord (-x) (-y)
+
+data Dir = U | R | D | L | None deriving (Show, Eq, Ord)
+
+(#+) :: Coord -> Dir -> Coord
+c #+ dir = case dir of
+  U -> c + north
+  R -> c + east
+  D -> c + south
+  L -> c + west
+  None -> c
