@@ -50,6 +50,8 @@ south = Coord 1 0
 west :: Coord
 west = Coord 0 (-1)
 
+dirs = [north, east, south, west]
+
 invert :: Coord -> Coord
 invert (Coord y x) = Coord x y
 
