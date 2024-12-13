@@ -1,6 +1,9 @@
 module github.com/blakeinstein/AOC/2024
 
-go 1.21.4
+go 1.22
+
+toolchain go1.23.3
+
 
 require (
 	github.com/samber/lo v1.47.0 // indirect
