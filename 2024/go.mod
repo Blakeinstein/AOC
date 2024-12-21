@@ -1,8 +1,10 @@
 module github.com/blakeinstein/AOC/2024
 
-go 1.22
+go 1.23.0
 
 toolchain go1.23.3
+
+require github.com/elliotchance/orderedmap/v3 v3.0.0
 
 require (
 	github.com/aclements/go-moremath v0.0.0-20241023150245-c8bbc672ef66 // indirect
