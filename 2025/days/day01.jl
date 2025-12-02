@@ -35,9 +35,15 @@ L82"""
 # ╠═╡ show_logs = false
 real_input = read(`cat $real_input_fp`, String)
 
+# ╔═╡ a5888f1d-d211-4c65-8003-a20d7314cac2
+struct Move
+	direction::Char
+	steps::Number
+end
+
 # ╔═╡ 25c1db54-f713-416e-bee4-efc299a9bac6
-function parse_input(input_str)
-	return input_str
+function parse_input(input_str::String)::Vector{Move}
+	return map((line) -> Move(line[1], parse(Int, line[2:end])), split(input_str))
 end
 
 # ╔═╡ b24a080f-199a-4632-86a0-7af867567c2e
@@ -46,9 +52,29 @@ function solver(input_parser, part_solver, input)
 	return string(part_solver(parsed_input))
 end
 
+# ╔═╡ 778d8406-c983-460a-8d03-8a60e2236d45
+function rotate(curr::Int, move::Move)::Int
+	mod(
+		begin 
+			if move.direction == 'R'
+				curr + move.steps
+			else
+				curr - move.steps
+			end
+		end, 
+		100
+	)
+end
+
 # ╔═╡ 9efaf158-c88a-47a4-a0b6-86c5227d5daa
-function solve_part1(input::String)::Number
-	return length(input)
+function solve_part1(moves::Vector{Move})::Number
+	count = 0
+	pos = 50
+	for move in moves
+		pos = rotate(pos, move)
+		count += (pos == 0)
+	end
+	return count
 end
 
 # ╔═╡ c34928c8-a273-4d63-8fa5-e3de89fff8d7
@@ -58,8 +84,18 @@ solver(parse_input, solve_part1, test_input)
 solver(parse_input, solve_part1, real_input)
 
 # ╔═╡ f7bb2230-22ba-4b40-8af2-dd7226e0a9b2
-function solve_part2(input::String)::Number
-	return length(input)
+function solve_part2(moves::Vector{Move})::Number
+	count = 0
+	pos = 50
+	for move in moves
+		if move.direction == 'R'
+			count += floor((pos + move.steps) / 100) - floor(pos / 100)
+		else
+			count += floor((pos - 1) / 100) - floor((pos - 1 - move.steps) / 100)
+		end
+		pos = rotate(pos, move)
+	end
+	return count
 end
 
 # ╔═╡ 154fec09-f761-43aa-aaed-129d4d2f711e
@@ -92,8 +128,10 @@ project_hash = "71853c6197a6a7f222db0f1978c7cb232b87c5ee"
 # ╠═8a79b53a-c8fe-11f0-9297-97044163d935
 # ╠═ea4bd3be-5078-4e13-8373-6804189aae80
 # ╠═649d2ff5-f85a-43ed-8993-81a51dda4ad1
+# ╠═a5888f1d-d211-4c65-8003-a20d7314cac2
 # ╠═25c1db54-f713-416e-bee4-efc299a9bac6
 # ╠═b24a080f-199a-4632-86a0-7af867567c2e
+# ╠═778d8406-c983-460a-8d03-8a60e2236d45
 # ╠═9efaf158-c88a-47a4-a0b6-86c5227d5daa
 # ╠═c34928c8-a273-4d63-8fa5-e3de89fff8d7
 # ╠═6f275cf8-4367-4398-aa21-8f1d9cd8c36e
