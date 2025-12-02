@@ -11,7 +11,10 @@ YEAR = 2025
 DAY = 2
 
 # ╔═╡ 74bb4e7b-c622-40bc-8ab7-b06068d5595c
-run(`aoc -y $YEAR -d $DAY`)
+begin
+	problem = read(`aoc -y $YEAR -d $DAY read -m -P`, String)
+	@eval @md_str $problem
+end
 
 # ╔═╡ 5367dbdf-ee9f-4360-a7d3-a8a5988d90fa
 real_input_fp = `../input/day$DAY.txt`
@@ -87,7 +90,7 @@ project_hash = "71853c6197a6a7f222db0f1978c7cb232b87c5ee"
 # ╔═╡ Cell order:
 # ╠═a02868a2-6df2-4d50-8cd0-5ca77c6d8cea
 # ╠═d843733f-a453-44c4-b759-6e84dcb535e5
-# ╠═74bb4e7b-c622-40bc-8ab7-b06068d5595c
+# ╟─74bb4e7b-c622-40bc-8ab7-b06068d5595c
 # ╠═5367dbdf-ee9f-4360-a7d3-a8a5988d90fa
 # ╠═8a79b53a-c8fe-11f0-9297-97044163d935
 # ╠═ea4bd3be-5078-4e13-8373-6804189aae80

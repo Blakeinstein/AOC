@@ -11,7 +11,10 @@ YEAR = 2025
 DAY = 8
 
 # ╔═╡ 74bb4e7b-c622-40bc-8ab7-b06068d5595c
-run(`aoc -y $YEAR -d $DAY`)
+begin
+	problem = read(`aoc -y $YEAR -d $DAY read -m -P`, String)
+	@eval @md_str $problem
+end
 
 # ╔═╡ 5367dbdf-ee9f-4360-a7d3-a8a5988d90fa
 real_input_fp = `../input/day$DAY.txt`
