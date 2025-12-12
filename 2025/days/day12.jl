@@ -23,25 +23,68 @@ real_input_fp = `../input/day$DAY.txt`
 run(`aoc -y $YEAR -d $DAY download -I -i $real_input_fp`)
 
 # ╔═╡ ea4bd3be-5078-4e13-8373-6804189aae80
-test_input = """L68
-L30
-R48
-L5
-R60
-L55
-L1
-L99
-R14
-L82"""
+test_input = """0:
+###
+##.
+##.
+
+1:
+###
+##.
+.##
+
+2:
+.##
+###
+##.
+
+3:
+##.
+###
+##.
+
+4:
+###
+#..
+###
+
+5:
+###
+.#.
+###
+
+4x4: 0 0 0 0 2 0
+12x5: 1 0 1 0 2 2
+12x5: 1 0 1 0 3 2"""
 
 # ╔═╡ 649d2ff5-f85a-43ed-8993-81a51dda4ad1
 # ╠═╡ show_logs = false
 real_input = read(`cat $real_input_fp`, String)
 
-# ╔═╡ 25c1db54-f713-416e-bee4-efc299a9bac6
-function parse_input(input_str)
-	return input_str
+# ╔═╡ 73892e9b-d257-4d2a-98e0-665aa2675cda
+struct Tree
+	width::Int64
+	height::Int64
+	shape_counts::Vector{Int64}
 end
+
+# ╔═╡ 25c1db54-f713-416e-bee4-efc299a9bac6
+function parse_input(input_str::AbstractString)::Tuple{Vector{AbstractString}, Vector{Tree}}
+	raw_shapes..., raw_trees = collect(split(strip(input_str), "\n\n"))
+
+	trees = map(
+		line -> begin
+			width, height, shape_counts... = parse.(Int64, first.(eachmatch(r"(\d+)", line)))
+			Tree(width, height, shape_counts)
+		end,
+		split(raw_trees, "\n")
+	)
+
+	return raw_shapes, trees
+end
+
+# ╔═╡ 4beafbfe-b1a0-48d1-9103-e635fe43930e
+parse_input(test_input)
 
 # ╔═╡ b24a080f-199a-4632-86a0-7af867567c2e
 function solver(input_parser, part_solver, input)
@@ -50,8 +93,20 @@ function solver(input_parser, part_solver, input)
 end
 
 # ╔═╡ 9efaf158-c88a-47a4-a0b6-86c5227d5daa
-function solve_part1(input::String)::Number
-	return length(input)
+function solve_part1(input::Tuple{Vector{AbstractString}, Vector{Tree}})::Number
+	shapes, trees = input
+	shape_sizes = map(shape -> count(isequal('#'), shape), shapes)
+
+	count(
+		tree -> begin
+			area = tree.width * tree.height
+			nec_space = sum(enumerate(tree.shape_counts)) do (idx, val) 
+				shape_sizes[idx] * val
+			end
+			area > (1.2 * nec_space)
+		end,
+		trees
+	)
 end
 
 # ╔═╡ c34928c8-a273-4d63-8fa5-e3de89fff8d7
@@ -64,12 +119,6 @@ solver(parse_input, solve_part1, real_input)
 function solve_part2(input::String)::Number
 	return length(input)
 end
-
-# ╔═╡ 154fec09-f761-43aa-aaed-129d4d2f711e
-solver(parse_input, solve_part2, test_input)
-
-# ╔═╡ 4b783820-f72d-4ea8-bf8c-bbc2d556484c
-solver(parse_input, solve_part2, real_input)
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -88,20 +137,20 @@ project_hash = "71853c6197a6a7f222db0f1978c7cb232b87c5ee"
 """
 
 # ╔═╡ Cell order:
-# ╠═a02868a2-6df2-4d50-8cd0-5ca77c6d8cea
-# ╠═d843733f-a453-44c4-b759-6e84dcb535e5
+# ╟─a02868a2-6df2-4d50-8cd0-5ca77c6d8cea
+# ╟─d843733f-a453-44c4-b759-6e84dcb535e5
 # ╠═74bb4e7b-c622-40bc-8ab7-b06068d5595c
 # ╠═5367dbdf-ee9f-4360-a7d3-a8a5988d90fa
 # ╠═8a79b53a-c8fe-11f0-9297-97044163d935
 # ╠═ea4bd3be-5078-4e13-8373-6804189aae80
 # ╠═649d2ff5-f85a-43ed-8993-81a51dda4ad1
+# ╠═73892e9b-d257-4d2a-98e0-665aa2675cda
 # ╠═25c1db54-f713-416e-bee4-efc299a9bac6
+# ╠═4beafbfe-b1a0-48d1-9103-e635fe43930e
 # ╠═b24a080f-199a-4632-86a0-7af867567c2e
 # ╠═9efaf158-c88a-47a4-a0b6-86c5227d5daa
 # ╠═c34928c8-a273-4d63-8fa5-e3de89fff8d7
 # ╠═6f275cf8-4367-4398-aa21-8f1d9cd8c36e
 # ╠═f7bb2230-22ba-4b40-8af2-dd7226e0a9b2
-# ╠═154fec09-f761-43aa-aaed-129d4d2f711e
-# ╠═4b783820-f72d-4ea8-bf8c-bbc2d556484c
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
