@@ -8,3 +8,4 @@ This repository contains solutions for advent of code problems.
 - [x] - 2022 - Rust
 - [x] - 2023 - Haskell
 - [x] - 2024 - Go
+- [x] - 2025 - Julia
