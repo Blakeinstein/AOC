@@ -5,13 +5,13 @@ from time import perf_counter
 
 INPUT_FILE = None
 
-def laod_input():
+def load_input():
   data = open(INPUT_FILE, mode="rt").read()
   return data
 
 def solve():
-  inp = laod_input()
-  
+  inp = load_input()
+
   part1 = 0
   part2 = 0
 
