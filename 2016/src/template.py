@@ -3,7 +3,7 @@ import pandas as pd
 
 from time import perf_counter
 
-INPUT_FILE = None
+INPUT_FILE = "input/2016/day.txt"
 
 def load_input():
   data = open(INPUT_FILE, mode="rt").read()
