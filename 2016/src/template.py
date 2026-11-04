@@ -13,9 +13,10 @@ def solve():
   inp = load_input()
 
   part1 = 0
-  part2 = 0
+  print(f"{part1 = }")
 
-  print(f"{part1 = }\n{part2 = }")
+  part2 = 0
+  print(f"{part2 = }")
 
 if __name__ == "__main__":
   t1 = perf_counter()
