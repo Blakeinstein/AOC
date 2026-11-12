@@ -5,21 +5,24 @@ from time import perf_counter
 
 INPUT_FILE = "input/2016/day.txt"
 
+
 def load_input():
-  data = open(INPUT_FILE, mode="rt").read()
-  return data
+    data = open(INPUT_FILE, mode="rt").read()
+    return data
+
 
 def solve():
-  inp = load_input()
+    inp = load_input()
 
-  part1 = 0
-  print(f"{part1 = }")
+    part1 = 0
+    print(f"{part1 = }")
 
-  part2 = 0
-  print(f"{part2 = }")
+    part2 = 0
+    print(f"{part2 = }")
+
 
 if __name__ == "__main__":
-  t1 = perf_counter()
-  solve()
-  t2 = perf_counter()
-  print(f"Execution time: {t2 - t1:0.4f} seconds")
+    t1 = perf_counter()
+    solve()
+    t2 = perf_counter()
+    print(f"Execution time: {t2 - t1:0.4f} seconds")
